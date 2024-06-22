@@ -2,7 +2,9 @@ local requests = require('cmp_ai.requests')
 
 OpenAI = requests:new(nil)
 BASE_URL = 'https://api.openai.com/v1/chat/completions'
-
+function trim_start(s)
+    return (s:gsub("^%s+", ""))
+end
 function OpenAI:new(params)
   print("In Openai")
   print(vim.inspect(params))
@@ -76,6 +78,7 @@ Your answer should be:
         local entry = response.message.content:gsub('<end_code_middle>', '')
         entry = entry:gsub('```', '')
         print(entry)
+        entry = trim_start(entry)
         table.insert(new_data, entry)
       end
     end
