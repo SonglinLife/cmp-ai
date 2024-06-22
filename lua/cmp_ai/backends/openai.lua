@@ -7,22 +7,26 @@ function OpenAI:new(o, params)
   o = o or {}
   setmetatable(o, self)
   self.__index = self
-  self.params = vim.tbl_deep_extend('keep', params or {}, {
+  self.params = vim.tbl_deep_extend('keep', params.requst_params or {}, {
     model = 'gpt-3.5-turbo',
     temperature = 0.1,
     n = 1,
   })
 
-  self.api_key = os.getenv('OPENAI_API_KEY')
+  self.api_key = params.api_key
   if not self.api_key then
     vim.schedule(function()
-      vim.notify('OPENAI_API_KEY environment variable not set', vim.log.levels.ERROR)
+      vim.notify('OPENAI_API_KEY not set', vim.log.levels.ERROR)
     end)
     self.api_key = 'NO_KEY'
   end
   self.headers = {
     'Authorization: Bearer ' .. self.api_key,
   }
+  self.chat_url = params.api_key
+  if not self.chat_url then
+    self.chat_url = 'https://api.openai.com/v1/chat/completions'
+  end
   return o
 end
 
@@ -59,7 +63,7 @@ Your answer should be:
     },
   }
   data = vim.tbl_deep_extend('keep', data, self.params)
-  self:Get(BASE_URL, self.headers, data, function(answer)
+  self:Get(self.chat_url, self.headers, data, function(answer)
     local new_data = {}
     if answer.choices then
       for _, response in ipairs(answer.choices) do
