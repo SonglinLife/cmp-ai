@@ -4,10 +4,11 @@ OpenAI = requests:new(nil)
 BASE_URL = 'https://api.openai.com/v1/chat/completions'
 
 function OpenAI:new(params)
+  print("In Openai")
   print(vim.inspect(params))
   o = {}
   print(vim.inspect(o))
-  print(params.requst_params)
+  print(vim.inspect(params.requst_params))
   
   setmetatable(o, self)
   self.__index = self
