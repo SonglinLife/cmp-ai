@@ -75,6 +75,7 @@ Your answer should be:
       for _, response in ipairs(answer.choices) do
         local entry = response.message.content:gsub('<end_code_middle>', '')
         entry = entry:gsub('```', '')
+        print(entry)
         table.insert(new_data, entry)
       end
     end
