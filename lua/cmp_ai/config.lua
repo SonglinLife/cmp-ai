@@ -20,8 +20,10 @@ function M:setup(params)
   for k, v in pairs(params or {}) do
     conf[k] = v
   end
+  print(conf)
   local status, provider = pcall(require, 'cmp_ai.backends.' .. conf.provider:lower())
   if status then
+    print(conf.provider_options)
     conf.provider = provider:new(conf.provider_options)
   else
     vim.notify('Bad provider in config: ' .. conf.provider, vim.log.levels.ERROR)
