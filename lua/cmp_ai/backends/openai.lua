@@ -3,12 +3,12 @@ local requests = require('cmp_ai.requests')
 OpenAI = requests:new(nil)
 BASE_URL = 'https://api.openai.com/v1/chat/completions'
 
-function OpenAI:new(o, params)
+function OpenAI:new(params)
   print(vim.inspect(params))
-
+  o = {}
   print(vim.inspect(o))
   -- print(params.requst_params)
-  o = o or {}
+  
   setmetatable(o, self)
   self.__index = self
   self.params = vim.tbl_deep_extend('keep', params.requst_params or {}, {
