@@ -32,6 +32,7 @@ function OpenAI:new(params)
   if not self.chat_url then
     self.chat_url = 'https://api.openai.com/v1/chat/completions'
   end
+  print(vim.inspect(self))
   return o
 end
 
