@@ -28,7 +28,7 @@ function OpenAI:new(params)
   self.headers = {
     'Authorization: Bearer ' .. self.api_key,
   }
-  self.chat_url = params.api_key
+  self.chat_url = params.chat_url
   if not self.chat_url then
     self.chat_url = 'https://api.openai.com/v1/chat/completions'
   end
