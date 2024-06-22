@@ -7,7 +7,7 @@ function OpenAI:new(o, params)
   print(vim.inspect(params))
 
   print(vim.inspect(o))
-  print(params.requst_params)
+  -- print(params.requst_params)
   o = o or {}
   setmetatable(o, self)
   self.__index = self
