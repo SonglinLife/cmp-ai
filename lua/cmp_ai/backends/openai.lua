@@ -4,6 +4,8 @@ OpenAI = requests:new(nil)
 BASE_URL = 'https://api.openai.com/v1/chat/completions'
 
 function OpenAI:new(o, params)
+  print(params)
+  print(params.requst_params)
   o = o or {}
   setmetatable(o, self)
   self.__index = self
